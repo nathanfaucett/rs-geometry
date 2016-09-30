@@ -1,0 +1,17 @@
+[package]
+name = "geometry"
+version = "0.1.0"
+authors = ["nathanfaucett <nathanfaucett@gmail.com>"]
+
+keywords = ["geometry"]
+description = "geometry data structure"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/nathanfaucett/rs-geometry.git"
+homepage = "https://github.com/nathanfaucett/rs-geometry"
+
+[dependencies.shared]
+git = "https://github.com/nathanfaucett/rs-shared.git"
+
+[dependencies.gl_context]
+git = "https://github.com/nathanfaucett/rs-gl_context.git"
