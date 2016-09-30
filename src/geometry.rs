@@ -44,4 +44,10 @@ impl<'a> Geometry<'a> {
 
     pub fn get_bone(&self, index: usize) -> Option<&Bone> {self.data.bones.get(index)}
     pub fn get_bone_mut(&mut self, index: usize) -> Option<&mut Bone> {self.data.bones.get_mut(index)}
+
+    pub fn get_attributes(&self) -> &BTreeMap<String, Attribute<'a>> {&self.data.attributes}
+    pub fn get_attributes_mut(&mut self) -> &mut BTreeMap<String, Attribute<'a>> {&mut self.data.attributes}
+
+    pub fn get_bones(&self) -> &Vec<Bone> {&self.data.bones}
+    pub fn get_bones_mut(&mut self) -> &mut Vec<Bone> {&mut self.data.bones}
 }
