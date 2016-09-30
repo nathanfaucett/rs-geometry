@@ -23,14 +23,14 @@ fn test_geometry() {
     geo.add_attribute(Attribute::new_u32("indices", &INDICES, 1, false));
 
     let vertices = geo.get_attribute("vertices").unwrap();
-    match vertices.get_value() {
-        &AttributeValue::F32(v) => assert_eq!(v, VERTICES),
+    match vertices.value {
+        AttributeValue::F32(v) => assert_eq!(v, VERTICES),
         _ => panic!("unexpected type"),
     }
 
     let indices = geo.get_attribute("indices").unwrap();
-    match indices.get_value() {
-        &AttributeValue::U32(i) => assert_eq!(i, INDICES),
+    match indices.value {
+        AttributeValue::U32(i) => assert_eq!(i, INDICES),
         _ => panic!("unexpected type"),
     }
 }

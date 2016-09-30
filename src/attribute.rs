@@ -20,18 +20,18 @@ pub enum AttributeValue<'a> {
 
 #[derive(Debug)]
 pub struct Attribute<'a> {
-    name: String,
-    array: AttributeValue<'a>,
-    item_size: usize,
-    dynamic: bool,
+    pub name: String,
+    pub value: AttributeValue<'a>,
+    pub item_size: usize,
+    pub dynamic: bool,
 }
 
 macro_rules! create_new_fn {
     ($f: ident, $n: ident, $k: ty) => (
-        pub fn $f(name: &str, array: &'a [$k], item_size: usize, dynamic: bool) -> Self {
+        pub fn $f(name: &str, value: &'a [$k], item_size: usize, dynamic: bool) -> Self {
             Attribute {
                 name: String::from(name),
-                array: AttributeValue::$n(array),
+                value: AttributeValue::$n(value),
                 item_size: item_size,
                 dynamic: dynamic,
             }
@@ -52,12 +52,6 @@ impl<'a> Attribute<'a> {
 
     create_new_fn!(new_f32, F32, f32);
     create_new_fn!(new_f64, F64, f64);
-
-    pub fn get_name(&self) -> String {self.name.clone()}
-    pub fn get_item_size(&self) -> usize {self.item_size}
-
-    pub fn get_value(&self) -> &AttributeValue<'a> {&self.array}
-    pub fn get_value_mut(&mut self) -> &mut AttributeValue<'a> {&mut self.array}
 
     pub fn is_static(&self) -> bool {!self.dynamic}
     pub fn is_dynamic(&self) -> bool {self.dynamic}
