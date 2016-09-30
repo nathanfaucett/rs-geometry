@@ -10,8 +10,9 @@ use bone::Bone;
 
 #[derive(Debug)]
 pub struct GeometryData<'a> {
-    pub attributes: BTreeMap<String, Attribute<'a>>,
-    pub bones: Vec<Bone>,
+    attributes: BTreeMap<String, Attribute<'a>>,
+    bones: Vec<Bone>,
+    dirty: bool,
 }
 
 #[derive(Clone)]
@@ -50,4 +51,10 @@ impl<'a> Geometry<'a> {
 
     pub fn get_bones(&self) -> &Vec<Bone> {&self.data.bones}
     pub fn get_bones_mut(&mut self) -> &mut Vec<Bone> {&mut self.data.bones}
+
+    pub fn get_dirty(&self) -> bool {self.data.dirty}
+    pub fn set_dirty(&mut self, dirty: bool) -> &mut Self {
+        self.data.dirty = dirty;
+        self
+    }
 }
