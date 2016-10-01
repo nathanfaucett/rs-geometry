@@ -55,4 +55,21 @@ impl<'a> Attribute<'a> {
 
     pub fn is_static(&self) -> bool {!self.dynamic}
     pub fn is_dynamic(&self) -> bool {self.dynamic}
+
+    pub fn len(&self) -> usize {
+        match self.value {
+            AttributeValue::U8(v) => v.len(),
+            AttributeValue::U16(v) => v.len(),
+            AttributeValue::U32(v) => v.len(),
+            AttributeValue::U64(v) => v.len(),
+
+            AttributeValue::I8(v) => v.len(),
+            AttributeValue::I16(v) => v.len(),
+            AttributeValue::I32(v) => v.len(),
+            AttributeValue::I64(v) => v.len(),
+
+            AttributeValue::F32(v) => v.len(),
+            AttributeValue::F64(v) => v.len(),
+        }
+    }
 }
