@@ -5,13 +5,11 @@ use collections::btree_map::BTreeMap;
 use shared::Shared;
 
 use attribute::Attribute;
-use bone::Bone;
 
 
 #[derive(Debug)]
 pub struct GeometryData<'a> {
     attributes: BTreeMap<String, Attribute<'a>>,
-    bones: Vec<Bone>,
     dirty: bool,
 }
 
@@ -26,7 +24,7 @@ impl<'a> Geometry<'a> {
         Geometry {
             data: Shared::new(GeometryData {
                 attributes: BTreeMap::new(),
-                bones: Vec::new(),
+                dirty: false,
             })
         }
     }
