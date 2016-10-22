@@ -4,6 +4,8 @@
 
 extern crate collections;
 
+extern crate hash_map;
+extern crate insert;
 extern crate shared;
 
 

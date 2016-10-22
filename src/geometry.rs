@@ -1,6 +1,7 @@
 use collections::string::String;
-use collections::btree_map::BTreeMap;
 
+use hash_map::HashMap;
+use insert::Insert;
 use shared::Shared;
 
 use attribute::Attribute;
@@ -8,7 +9,7 @@ use attribute::Attribute;
 
 #[derive(Debug)]
 pub struct GeometryData<'a> {
-    attributes: BTreeMap<String, Attribute<'a>>,
+    attributes: HashMap<String, Attribute<'a>>,
     dirty: bool,
 }
 
@@ -22,7 +23,7 @@ impl<'a> Geometry<'a> {
     pub fn new() -> Self {
         Geometry {
             data: Shared::new(GeometryData {
-                attributes: BTreeMap::new(),
+                attributes: HashMap::new(),
                 dirty: false,
             })
         }
@@ -36,8 +37,8 @@ impl<'a> Geometry<'a> {
     pub fn get_attribute(&self, name: &str) -> Option<&Attribute<'a>> {self.data.attributes.get(name)}
     pub fn get_attribute_mut(&mut self, name: &str) -> Option<&mut Attribute<'a>> {self.data.attributes.get_mut(name)}
 
-    pub fn get_attributes(&self) -> &BTreeMap<String, Attribute<'a>> {&self.data.attributes}
-    pub fn get_attributes_mut(&mut self) -> &mut BTreeMap<String, Attribute<'a>> {&mut self.data.attributes}
+    pub fn get_attributes(&self) -> &HashMap<String, Attribute<'a>> {&self.data.attributes}
+    pub fn get_attributes_mut(&mut self) -> &mut HashMap<String, Attribute<'a>> {&mut self.data.attributes}
 
     pub fn get_dirty(&self) -> bool {self.data.dirty}
     pub fn set_dirty(&mut self, dirty: bool) -> &mut Self {
