@@ -1,34 +1,36 @@
+use alloc::boxed::Box;
+
 use collections::string::String;
 
 
 #[derive(Debug)]
-pub enum AttributeValue<'a> {
-    U8(&'a [u8]),
-    U16(&'a [u16]),
-    U32(&'a [u32]),
-    U64(&'a [u64]),
+pub enum AttributeValue {
+    U8(Box<[u8]>),
+    U16(Box<[u16]>),
+    U32(Box<[u32]>),
+    U64(Box<[u64]>),
 
-    I8(&'a [i8]),
-    I16(&'a [i16]),
-    I32(&'a [i32]),
-    I64(&'a [i64]),
+    I8(Box<[i8]>),
+    I16(Box<[i16]>),
+    I32(Box<[i32]>),
+    I64(Box<[i64]>),
 
-    F32(&'a [f32]),
-    F64(&'a [f64]),
+    F32(Box<[f32]>),
+    F64(Box<[f64]>),
 }
 
 
 #[derive(Debug)]
-pub struct Attribute<'a> {
+pub struct Attribute {
     pub name: String,
-    pub value: AttributeValue<'a>,
+    pub value: AttributeValue,
     pub item_size: usize,
     pub dynamic: bool,
 }
 
 macro_rules! create_new_fn {
     ($f: ident, $n: ident, $k: ty) => (
-        pub fn $f(name: &str, value: &'a [$k], item_size: usize, dynamic: bool) -> Self {
+        pub fn $f(name: &str, value: Box<[$k]>, item_size: usize, dynamic: bool) -> Self {
             Attribute {
                 name: String::from(name),
                 value: AttributeValue::$n(value),
@@ -39,7 +41,7 @@ macro_rules! create_new_fn {
     )
 }
 
-impl<'a> Attribute<'a> {
+impl Attribute {
     create_new_fn!(new_i8, I8, i8);
     create_new_fn!(new_i16, I16, i16);
     create_new_fn!(new_i32, I32, i32);
@@ -58,18 +60,18 @@ impl<'a> Attribute<'a> {
 
     pub fn len(&self) -> usize {
         match self.value {
-            AttributeValue::U8(v) => v.len(),
-            AttributeValue::U16(v) => v.len(),
-            AttributeValue::U32(v) => v.len(),
-            AttributeValue::U64(v) => v.len(),
+            AttributeValue::U8(ref v) => v.len(),
+            AttributeValue::U16(ref v) => v.len(),
+            AttributeValue::U32(ref v) => v.len(),
+            AttributeValue::U64(ref v) => v.len(),
 
-            AttributeValue::I8(v) => v.len(),
-            AttributeValue::I16(v) => v.len(),
-            AttributeValue::I32(v) => v.len(),
-            AttributeValue::I64(v) => v.len(),
+            AttributeValue::I8(ref v) => v.len(),
+            AttributeValue::I16(ref v) => v.len(),
+            AttributeValue::I32(ref v) => v.len(),
+            AttributeValue::I64(ref v) => v.len(),
 
-            AttributeValue::F32(v) => v.len(),
-            AttributeValue::F64(v) => v.len(),
+            AttributeValue::F32(ref v) => v.len(),
+            AttributeValue::F64(ref v) => v.len(),
         }
     }
 }
