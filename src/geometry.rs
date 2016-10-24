@@ -1,5 +1,7 @@
 use collections::string::String;
 
+use core::hash::{Hash, Hasher};
+
 use hash_map::HashMap;
 use insert::Insert;
 use shared::Shared;
@@ -13,7 +15,6 @@ pub struct GeometryData {
     dirty: bool,
 }
 
-#[derive(Clone)]
 pub struct Geometry {
     data: Shared<GeometryData>,
 }
@@ -44,5 +45,12 @@ impl Geometry {
     pub fn set_dirty(&mut self, dirty: bool) -> &mut Self {
         self.data.dirty = dirty;
         self
+    }
+}
+
+impl Hash for Geometry {
+    #[inline]
+    fn hash<H: Hasher>(&self, state: &mut H) {
+         (&*self.data as *const _).hash(state);
     }
 }
