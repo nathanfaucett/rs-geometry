@@ -9,7 +9,7 @@ use shared::Shared;
 use attribute::Attribute;
 
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct GeometryData {
     attributes: HashMap<String, Attribute>,
     dirty: bool,
@@ -54,3 +54,10 @@ impl Hash for Geometry {
          (&*self.data as *const _).hash(state);
     }
 }
+
+impl PartialEq<Geometry> for Geometry {
+    fn eq(&self, other: &Geometry) -> bool {
+        self.data.eq(&*other.data)
+    }
+}
+impl Eq for Geometry {}

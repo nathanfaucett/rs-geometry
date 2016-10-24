@@ -75,3 +75,10 @@ impl Attribute {
         }
     }
 }
+
+impl PartialEq<Attribute> for Attribute {
+    fn eq(&self, other: &Attribute) -> bool {
+        (self as *const _) == (other as *const _)
+    }
+}
+impl Eq for Attribute {}
