@@ -33,7 +33,7 @@ impl Geometry {
         }
     }
 
-    pub fn get_uuid(&mut self) -> &Uuid {&self.data.uuid}
+    pub fn get_uuid(&self) -> &Uuid {&self.data.uuid}
 
     pub fn add_attribute(&mut self, attribute: Attribute) -> &mut Self {
         self.data.attributes.insert(attribute.name.clone(), attribute);
