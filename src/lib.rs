@@ -6,6 +6,8 @@
 extern crate alloc;
 extern crate collections;
 
+extern crate uuid;
+
 extern crate hash_map;
 extern crate insert;
 extern crate shared;
