@@ -17,6 +17,7 @@ pub struct GeometryData {
     dirty: bool,
 }
 
+#[derive(Clone)]
 pub struct Geometry {
     data: Shared<GeometryData>,
 }
