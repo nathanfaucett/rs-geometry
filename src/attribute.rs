@@ -1,22 +1,22 @@
-use alloc::boxed::Box;
-
 use collections::string::String;
+
+use vector::Vector;
 
 
 #[derive(Debug)]
 pub enum AttributeValue {
-    U8(Box<[u8]>),
-    U16(Box<[u16]>),
-    U32(Box<[u32]>),
-    U64(Box<[u64]>),
+    U8(Vector<u8>),
+    U16(Vector<u16>),
+    U32(Vector<u32>),
+    U64(Vector<u64>),
 
-    I8(Box<[i8]>),
-    I16(Box<[i16]>),
-    I32(Box<[i32]>),
-    I64(Box<[i64]>),
+    I8(Vector<i8>),
+    I16(Vector<i16>),
+    I32(Vector<i32>),
+    I64(Vector<i64>),
 
-    F32(Box<[f32]>),
-    F64(Box<[f64]>),
+    F32(Vector<f32>),
+    F64(Vector<f64>),
 }
 
 
@@ -30,7 +30,7 @@ pub struct Attribute {
 
 macro_rules! create_new_fn {
     ($f: ident, $n: ident, $k: ty) => (
-        pub fn $f(name: &str, value: Box<[$k]>, item_size: usize, dynamic: bool) -> Self {
+        pub fn $f(name: &str, value: Vector<$k>, item_size: usize, dynamic: bool) -> Self {
             Attribute {
                 name: String::from(name),
                 value: AttributeValue::$n(value),
