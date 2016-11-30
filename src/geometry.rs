@@ -13,6 +13,7 @@ use attribute::Attribute;
 #[derive(Debug, PartialEq, Eq)]
 pub struct GeometryData {
     uuid: Uuid,
+    index: Option<Attribute>,
     attributes: HashMap<String, Attribute>,
     dirty: bool,
 }
@@ -28,6 +29,7 @@ impl Geometry {
         Geometry {
             data: Shared::new(GeometryData {
                 uuid: Uuid::new_v4(),
+                index: None,
                 attributes: HashMap::new(),
                 dirty: false,
             })
@@ -35,6 +37,17 @@ impl Geometry {
     }
 
     pub fn get_uuid(&self) -> &Uuid {&self.data.uuid}
+
+    pub fn get_index(&self) -> Option<&Attribute> {
+        match self.data.index {
+            None => None,
+            Some(ref attribute) => Some(attribute),
+        }
+    }
+    pub fn set_index(&mut self, attribute: Attribute) -> &mut Self {
+        self.data.index = Some(attribute);
+        self
+    }
 
     pub fn add_attribute(&mut self, attribute: Attribute) -> &mut Self {
         self.data.attributes.insert(attribute.name.clone(), attribute);
